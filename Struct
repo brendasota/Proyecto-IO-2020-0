@@ -1,0 +1,28 @@
+mutable struct Trabajadores
+    Nombre::String
+    Sueldo::Int64
+    Horas_extra::Int64
+    Dominio::Dict{String, Int64} ##Debe ser un diccionario que defina los niveles en cada skill {Picking:2,Calidad:2}
+    Preferencias::String
+    ##Prioridad de contratar 1 es max y 5 es min
+    Prioridad::Int64
+    ##Define si se le contrata o no
+    Contratado::Bool
+    ##Turnos que trabaja
+    Turnos::Array{Int64,1}
+    ##Para conocer quiénes de los trabajadores esán siendo tomadas sus preferencias
+    Satisfactibilidad::Bool
+end
+##Ejemplo de un objeto de Trabajadores
+##["Juan Valdez", 1920, 100,{Picking:0,Calidad:1},"No últimos turnos",1, True,[0,1,0,1,0,1,0,0,...,|total turnos|]
+mutable struct Turnos
+    ID::String
+    ##Debe ser un diccionario (tomando 3 turnos) 
+    ##{Picking:{Básico:[3,2,4,1,],Intermedio:[1,2,3,4], Avanzado:[4,3,5,2]},Calidad:{Básico:[3,2,4,1],Intermedio:[1,2,3,4], Avanzado:[4,3,5,2]}}
+    tipo_skill::Dict{String, Dict{String, Array{Int64}}}
+    Trabajador_asignado::Array{String}
+    Demanda_abastecida::Bool
+end 
+
+##ejemplo de un objeto de Turnos
+##[Turnos["S1",{Picking:{Básico:[3,2,4,1,...,|n|],Intermedio:[1,2,3,4,...,|n|], Avanzado:[4,3,5,2,...,|n|]},Calidad:{Básico:[3,2,4,1,...,|n|],Intermedio:[1,2,3,4,...,|n|], Avanzado:[4,3,5,2,...,|n|]}},[],false]
