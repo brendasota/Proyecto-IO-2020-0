@@ -1,0 +1,13 @@
+#TURNOS DÍA DEBE SER PARA QUE EL USUARIO LO COLOQUE
+turnos_dia=12
+horas_turno=1/turnos_dia*24
+celda_turno=convert(Int64,horas_turno/2)
+Turnos_list2=[]
+for k in 1:6:nrow(Data_Demanda)
+    for j in 4:celda_turno:size(Data_Demanda,2)
+    Dict_demanda=Dict("Picking"=>Dict("Básico"=>Data_Demanda[k,j:j+celda_turno-1],"Medio"=>Data_Demanda[k,j:j+celda_turno-1],"Avanzado"=>Data_Demanda[k,j:j+celda_turno-1]))
+    anTurno=Turnos(Data_Demanda[k,:Semana],Dict_demanda,[],false)
+    push!(Turnos_list2,anTurno)
+    end
+end
+Turnos_list2
